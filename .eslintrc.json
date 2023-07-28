@@ -7,7 +7,7 @@
         "standard",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
-        "plugin:prettier/recommended"
+        "prettier"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -19,18 +19,6 @@
         "eslint-plugin-import-helpers"
     ],
     "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-                "printWidth": 80, // largura das minhas linhas
-                "tabWidth": 2, // espaço em relação ao começo da pagina
-                "singleQuote": true, // aspas simples
-                "trailingComma": "none", // virgula no fim da linha
-                "arrowParens": "always",
-                "semi": false, // ponto e virgula no final da linha
-                "endOfLine": "auto"
-            }
-        ],
         "react/react-in-jsx-scope": "off", // obrigar que o react esteja em tdas as paginas
         "react/prop-types": "off", 
         "react-hooks/rules-of-hooks": "error", // dar erro qnd fizer cagada
