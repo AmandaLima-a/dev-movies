@@ -8,6 +8,11 @@ import { useState, useEffect } from 'react'
 function Home(){
     const [movie, setMovie] = useState()
     const [topMovies, setTopMovies] = useState()
+    const [topSeries, setTopSeries] = useState()
+    const [cinemaMovies, setCinemaMovies] = useState()
+    const [popularMovies, setPopularMovies] = useState()
+    const [popularSeries, setPopularSeries] = useState()
+    const [peopleList, setPeopleList] = useState()
 
     useEffect(() => {
         async function getMovies() {
@@ -23,12 +28,58 @@ function Home(){
                 data: { results }
             } = await api.get('/movie/top_rated')
     
-            console.log(results)
             setTopMovies(results)
+        }
+
+        async function getTopSeries() {
+            const { 
+                data: { results }
+            } = await api.get('/tv/top_rated')
+    
+            console.log(results)
+            setTopSeries(results)
+        }
+
+        async function getCinemaMovies() {
+            const { 
+                data: { results }
+            } = await api.get('/movie/now_playing')
+    
+            setCinemaMovies(results)
+        }
+
+        async function getPopularMovies() {
+            const { 
+                data: { results }
+            } = await api.get('/movie/popular')
+    
+            setPopularMovies(results)
+        }
+
+        async function getPopularSeries() {
+            const { 
+                data: { results }
+            } = await api.get('/tv/popular')
+    
+            setPopularSeries(results)
+        }
+
+        async function getPeopleList() {
+            const { 
+                data: { results }
+            } = await api.get('/person/popular')
+    
+            console.log('Top artistas' + results)
+            setPeopleList(results)
         }
     
         getMovies()
         getTopMovies()
+        getTopSeries()
+        getCinemaMovies()
+        getPopularMovies()
+        getPopularSeries()
+        getPeopleList()
     }, [])
     
 
@@ -52,6 +103,11 @@ function Home(){
         </Background>
         )}
         {topMovies && <Slider info={topMovies} title={'Top Filmes'} />}
+        {topSeries && <Slider info={topSeries} title={'Top Séries'} />}
+        {cinemaMovies && <Slider info={cinemaMovies} title={'Filmes no Cinema'} />}
+        {popularMovies && <Slider info={popularMovies} title={'Filmes Populares'} />}
+        {popularSeries && <Slider info={popularSeries} title={'Séries Populares'} />}
+        {peopleList && <Slider info={peopleList} title={'Artistas mais Populares'} />}
         </>
     )
 }
