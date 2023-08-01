@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Home(){
     const [showModal, setShowModal] = useState(false)
-    const [movie, setMovie] = useState()
+    const [movie, setMovies] = useState()
     const [topMovies, setTopMovies] = useState()
     const [topSeries, setTopSeries] = useState()
     const [cinemaMovies, setCinemaMovies] = useState()
@@ -23,18 +23,40 @@ function Home(){
     
 
     useEffect(() => {
-        async function getAllData() {
+        //async function getAllData() {
             
     
-            setMovie(await getMovies())
-            setTopMovies(await getTopMovies())
-            setTopSeries(await getTopSeries())
-            setCinemaMovies(await getCinemaMovies())
-            setPopularMovies(await getPopularMovies())
-            setPopularSeries(await getPopularSeries())
-            setPeopleList(await getPeopleList())
-        }
+            //setMovie(await getMovies())
+            //setTopMovies(await getTopMovies())
+            //setTopSeries(await getTopSeries())
+            //setCinemaMovies(await getCinemaMovies())
+            //setPopularMovies(await getPopularMovies())
+            //setPopularSeries(await getPopularSeries())
+            //setPeopleList(await getPeopleList())
+        //}
 
+        async function getAllData() {
+            
+            Promise.all([
+                getMovies(),
+                getTopMovies(),
+                getTopSeries(),
+                getCinemaMovies(),
+                getPopularMovies(),
+                getPopularSeries(),
+                getPeopleList()
+            ])
+                .then(([movie, topMovies, topSeries, cinemaMovies, popularMovies, popularSeries, peopleList]) => {
+                    setMovies(movie)
+                    setTopMovies(topMovies)
+                    setTopSeries(topSeries)
+                    setCinemaMovies(cinemaMovies)
+                    setPopularMovies(popularMovies)
+                    setPopularSeries(popularSeries)
+                    setPeopleList(peopleList)
+                })
+                .catch( error => console.error(error))
+        }
        
         getAllData()
     }, [])
